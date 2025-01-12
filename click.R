@@ -1,7 +1,7 @@
 library(shiny)
 
 ui <- fluidPage(
-  plotOutput("plot", click = "plot_click"),
+  plotOutput("plot", hover = "plot_hover"),
   verbatimTextOutput("info"),
   plotOutput("distPlot")
 )
@@ -14,16 +14,16 @@ server <- function(input, output) {
   }, res = 96)
 
   output$info <- renderPrint({
-    req(input$plot_click)  # Ensure plot_click is available
-    a <- round(input$plot_click$x, 2)
-    b <- round(input$plot_click$y, 2)
+    req(input$plot_hover)
+    a <- round(input$plot_hover$x, 2)
+    b <- round(input$plot_hover$y, 2)
     cat("[", a, ", ", b, "]", sep = "")
   })
 
   output$distPlot <- renderPlot({
-    req(input$plot_click)  # Ensure plot_click is available
-    a <- round(input$plot_click$x, 2)
-    b <- round(input$plot_click$y, 2)
+    req(input$plot_hover)  # Ensure plot_click is available
+    a <- round(input$plot_hover$x, 2)
+    b <- round(input$plot_hover$y, 2)
     x <- seq(from = -1, to = 1, by = 0.01)
     f <- function(x){x^4 + a*x^2 + b*x}
     x <- seq(from = -1, to=1, by=0.01)
