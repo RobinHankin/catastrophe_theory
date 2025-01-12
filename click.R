@@ -31,16 +31,18 @@ server <- function(input, output) {
     
     jj <- polyroot(c(b,2*a,0,4))
     rr <- Re(jj[abs(Im(jj)) < 1e-9])
+    pp <- function(x, ...){points(x,f(x),pch=16,cex=4,...)}
+    
     if(length(rr) == 1){
-        points(rr[1],f(rr[1]),col="red",pch=16)
+        pp(rr[1],col="red")
     } else if (length(rr) == 2) {
-        points(rr[1],f(rr[1]), col="red",pch=16)
-        points(rr[2],f(rr[2]), col="red",pch=16)
+        pp(rr[1], col="red")
+        pp(rr[2], col="red")
     } else if (length(rr) == 3){
         rr <- sort(rr)
-        points(rr[1],f(rr[1]), col="red",pch=16)
-        points(rr[2],f(rr[2]), col="blue",pch=16)
-        points(rr[3],f(rr[3]), col="red",pch=16)
+        pp(rr[1], col="red")
+        pp(rr[2], col="blue")
+        pp(rr[3], col="red")
     } else {
         print("should have 1, 2 or 3 real roots")
         stop()
