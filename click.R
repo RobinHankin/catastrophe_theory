@@ -9,7 +9,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$plot <- renderPlot({
     par(pty = 's')
-    plot(c(-1, 1), c(-1, 1), pch = NA, asp = 1)
+    plot(c(-1, 1), c(-1, 1), pch = NA, asp = 1,xlab='a',ylab='b',main='control')
     abline(0, 1, col = 'red')
   }, res = 96)
 
