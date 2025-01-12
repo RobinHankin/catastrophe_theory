@@ -10,7 +10,9 @@ server <- function(input, output) {
   output$plot <- renderPlot({
     par(pty = 's')
     plot(c(-1, 1), c(-1, 1), pch = NA, asp = 1,xlab='a',ylab='b',main='control')
-    abline(0, 1, col = 'red')
+    x <- seq(from=0, to=1, by=0.01)
+    points(-6*x^2, -8*x^3, type="l")
+    points(-6*x^2, +8*x^3, type="l")
   }, res = 96)
 
   output$info <- renderPrint({
